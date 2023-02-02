@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    color: #1C1D1F;
+    
+}
+
+.page {
+    display: flex;
+    box-shadow: 10px 5px 5px #84C5CB;
+    margin-bottom: 10px;
+}
+
+#left {
+    margin-left: 5%;
+    width: 40%;
+}
+
+#right {
+    margin-left: 5%;
+    width: 90%;
+}
+
+img {
+    /* height: 300px; */
+    width: 100%;
+}
+
+.image-container {
+    position: relative;
+}
+
+.name {
+    position: absolute;
+    bottom: 0;
+    width: 120%;
+    color: white;
+    font-size: .6em;
+    background-color: rgba(132, 197, 203, 0.5);
+}
+
+.name h1, .name p{
+    margin-left: 30px;
+}
+
+.section {
+    /* padding: 5%; */
+    padding-bottom: 10%;
+    /* margin-right: 0; */
+}
+
+.content {
+    padding: 5%;
+}
+
+ul {
+    list-style-image: url('images/kunai-min-20.png');
+  }
+
+.title {
+    border-bottom: 2px solid #84C5CB;
+}
+
+td {
+    padding: 10px;
+    padding-right: 0;
+
+}
+
+/* td {
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+} */
+
+.icon {
+    color: 84C5CB;
+}
+
+.Sub {
+    margin: 5% 0 0 0;
+}
+
+.reference .content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.refrence .Sub{
+    width: 50%;
+}
+
+.experties, .overview {
+    padding-top: 10%;
+}
+
+.page {
+    width: 50%;
+    margin: auto;
+    border: 1px solid grey;
+    padding: 2%;
+    background-color: white;
+}
+
+body {
+    background-color: grey;
+}
+
+@media only screen and (max-width: 1200px) {
+    .page{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .page{
+        display: block;
+    }
+
+    #left {
+        width: 100%;
+    }
+    
+    #right {
+        width: 100%;
+    }
+
+    img {
+        width: 50%;
+    }
+
+    .name {
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width: 1800px) {
+    .page {
+        width: 30%;
+    }
+}
