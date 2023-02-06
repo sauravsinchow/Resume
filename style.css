@@ -4,29 +4,35 @@
     box-sizing: border-box;
 }
 
-.body {
-    color: #1C1D1F;
-    
+body {
+    color: grey;
+    background-color: grey;
 }
 
 .page {
     display: flex;
-    box-shadow: 10px 5px 5px #84C5CB;
     margin-bottom: 10px;
+    width: 60%;
+    margin: auto;
+    border: 1px solid grey;
+    background-color: white;
+    padding-right: 1%;
 }
 
 #left {
-    margin-left: 5%;
     width: 40%;
 }
 
 #right {
     margin-left: 5%;
-    width: 90%;
+    width: 60%;
+}
+
+#left .section {
+    margin-left: 15%;
 }
 
 img {
-    /* height: 300px; */
     width: 100%;
 }
 
@@ -37,44 +43,64 @@ img {
 .name {
     position: absolute;
     bottom: 0;
-    width: 120%;
+    width: 110%;
     color: white;
-    font-size: .6em;
+    font-size: .9em;
     background-color: rgba(132, 197, 203, 0.5);
+    transition: transform .2s;
+}
+
+.name:hover{
+    transform: scale(1.1);
 }
 
 .name h1, .name p{
     margin-left: 30px;
 }
 
+table {
+    margin-left: 10%;
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: 1px solid #e2e2e2;
+}
+
+tr:first-of-type {
+    border-top: 1px solid #e2e2e2;
+}
+
 .section {
-    /* padding: 5%; */
     padding-bottom: 10%;
-    /* margin-right: 0; */
+    transition: transform .2s;
+}
+
+.section:hover {
+    transform: scale(1.1);
 }
 
 .content {
-    padding: 5%;
+    padding: 5% 0;
 }
 
 ul {
     list-style-image: url('images/kunai-min-20.png');
-  }
+    margin-left: 10%;
+}
 
 .title {
+    color: #1C1D1F;
     border-bottom: 2px solid #84C5CB;
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 td {
     padding: 10px;
     padding-right: 0;
-
 }
-
-/* td {
-    border-bottom: 1px solid grey;
-    border-top: 1px solid grey;
-} */
 
 .icon {
     color: 84C5CB;
@@ -86,7 +112,7 @@ td {
 
 .reference .content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .refrence .Sub{
@@ -95,18 +121,6 @@ td {
 
 .experties, .overview {
     padding-top: 10%;
-}
-
-.page {
-    width: 50%;
-    margin: auto;
-    border: 1px solid grey;
-    padding: 2%;
-    background-color: white;
-}
-
-body {
-    background-color: grey;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -118,13 +132,24 @@ body {
 @media only screen and (max-width: 800px) {
     .page{
         display: block;
+        width: 100%;
+        /* padding: 2%; */
     }
-
+    .section, #left .section {
+        margin: 5%;
+    }
+    .section:hover {
+        transform: scale(1);
+    }
     #left {
+        margin: 0;
+        padding: 0;
         width: 100%;
     }
     
     #right {
+        margin: 0;
+        padding: 0;
         width: 100%;
     }
 
@@ -135,6 +160,10 @@ body {
     .name {
         width: 60%;
     }
+    .overview{
+        padding-top: 0;
+    }
+
 }
 
 @media only screen and (min-width: 1800px) {
