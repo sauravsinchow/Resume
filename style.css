@@ -19,6 +19,10 @@ body {
     padding-right: 1%;
 }
 
+.hidden {
+    display: none;
+}
+
 #left {
     width: 40%;
 }
@@ -135,6 +139,15 @@ td {
         width: 100%;
         /* padding: 2%; */
     }
+
+    .hidden {
+        display: block;
+    }
+
+    .visible {
+        display: none;
+    }
+
     .section, #left .section {
         margin: 5%;
     }
