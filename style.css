@@ -148,8 +148,13 @@ td {
         display: none;
     }
 
+    table {
+        margin: auto;
+    }
+
     .section, #left .section {
-        margin: 5%;
+        margin: 5% 5%;
+        padding: 0;
     }
     .section:hover {
         transform: scale(1);
