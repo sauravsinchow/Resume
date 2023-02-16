@@ -9,6 +9,27 @@ body {
     background-color: grey;
 }
 
+.sub-form {
+    display: none;
+}
+
+.invisible {
+    display: none;
+}
+
+.layout {
+    display: flex;
+}
+
+.form {
+    width: 40%;
+    margin: 5%;
+}
+
+.form {
+    background-color: white;
+}
+
 .page {
     display: flex;
     margin-bottom: 10px;
@@ -117,9 +138,10 @@ td {
 .reference .content {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
-.refrence .Sub{
+.reference .Sub{
     width: 50%;
 }
 
