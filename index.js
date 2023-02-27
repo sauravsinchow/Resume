@@ -1,36 +1,29 @@
 // Form Inner Htmls
 let introForm = `
-<label for="name">Name</label>
-<input id="name" type="text">
+<input id="name" type="text" placeholder="Name">
 <br>
-<label for="role">Role</label>
-<input type="text" id="role">
+<input type="text" id="role" placeholder="Role">
 <br>
-<label for="overview-desc">Overview</label>
-<input type="text" id="overview-desc">
+<input type="text" id="overview-desc" placeholder="Description">
 <br>
 <input type="button" value="Submit" id="intro-btn">`
 
 let skillForm = `
-<label for="skill">Skill</label>
-<input type="text" id="skill-name">
-<input type="button" value="Submit" id="skill-btn">
+<input type="text" id="skill-name" placeholder="Skill">
+<input type="button" value="Add" id="skill-btn">
 
 <ul>
     
 </ul>`
 
 let eduForm = `
-<label for="institute">Institute Name</label>
-<input type="text" id="institute">
+<input type="text" id="institute" placeholder="Institute Name">
 <br>
-<label for="year">Year</label>
-<input type="text" id="year">
+<input type="text" id="year" placeholder="Year">
 <br>
-<label for="desc">Description</label>
-<input type="text" id="desc">
+<input type="text" id="desc" placeholder="Description">
 <br>
-<input type="button" value="Submit" id="edu-btn">
+<input type="button" value="Add" id="edu-btn">
 
 <div class="edit invisible">
     <input type="button" value="Cancel" class="cancelBtn"">
@@ -42,45 +35,37 @@ let eduForm = `
 </ul>`
 
 let awardForm = `
-<label for="title">Title</label>
-<input type="text" id="title">
+<input type="text" id="title" placeholder="Title">
 <br>
-<label for="desc">Description</label>
-<input type="text" id="Awarddesc">
+<input type="text" id="Awarddesc" placeholder="Description">
 <br>
-<input type="button" value="Submit" id="award-btn">
+<input type="button" value="Add" id="award-btn">
 
 <ul>
     
 </ul>`
 
 let expForm = `
-<label for="company">Company Name</label>
-<input type="text" id="company">
+<input type="text" id="company" placeholder="Company Name">
 <br>
-<label for="expYear">Year</label>
-<input type="text" id="expYear">
+<input type="text" id="expYear" placeholder="Year">
 <br>
-<label for="expDesc">Description</label>
-<input type="text" id="expDesc">
+<input type="text" id="expDesc" placeholder="Description">
 <br>
-<input type="button" value="Submit" id="exp-btn">
+<input type="button" value="Add" id="exp-btn">
 
 <ul>
     
 </ul>`
 
 let refForm = `
-<label for="refName">Name</label>
-<input type="text" id="refName">
+<input type="text" id="refName" placeholder="Name">
 <br>
-<label for="post">Post</label>
-<input type="text" id="post">
+<input type="text" id="post"  placeholder="Post">
 <br>
-<label for="refCompany">Company</label>
-<input type="text" id="refCompany">
+<input type="text" id="refCompany"  placeholder="Company">
 <br>
-<input type="button" value="Submit" id="ref-btn">
+<input type="button" value="Add" id="ref-btn">
 
 <ul>
     
@@ -847,3 +832,24 @@ function IMG () {
         reader.readAsDataURL(imgInput.files[0]);
     })
 }
+
+const preview = document.getElementById("preview");
+let modal = document.getElementsByClassName("modal")[0];
+let overlay = document.getElementsByClassName("overlay")[0];
+let page = document.getElementsByClassName("page")[0];
+let closePreview = document.getElementById("closePreview");
+preview.addEventListener("click",() => {
+    let modalContent = createElementE('div','',{
+        class:"page"
+    });
+    modalContent.innerHTML = page.innerHTML;
+    modal.appendChild(modalContent);
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+})
+
+closePreview.addEventListener("click",()=>{
+    modal.removeChild(modal.children[1]);
+    modal.classList.add("hidden");
+    overlay.classList.add("hidden");
+})
