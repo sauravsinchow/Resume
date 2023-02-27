@@ -1,6 +1,5 @@
 // Form Inner Htmls
-let introForm = `Intro
-<br>
+let introForm = `
 <label for="name">Name</label>
 <input id="name" type="text">
 <br>
@@ -12,8 +11,7 @@ let introForm = `Intro
 <br>
 <input type="button" value="Submit" id="intro-btn">`
 
-let skillForm = `Skills
-<br>
+let skillForm = `
 <label for="skill">Skill</label>
 <input type="text" id="skill-name">
 <input type="button" value="Submit" id="skill-btn">
@@ -22,8 +20,7 @@ let skillForm = `Skills
     
 </ul>`
 
-let eduForm = `Education
-<br>
+let eduForm = `
 <label for="institute">Institute Name</label>
 <input type="text" id="institute">
 <br>
@@ -44,8 +41,7 @@ let eduForm = `Education
     
 </ul>`
 
-let awardForm = `award
-<br>
+let awardForm = `
 <label for="title">Title</label>
 <input type="text" id="title">
 <br>
@@ -58,8 +54,7 @@ let awardForm = `award
     
 </ul>`
 
-let expForm = `Experience
-<br>
+let expForm = `
 <label for="company">Company Name</label>
 <input type="text" id="company">
 <br>
@@ -75,8 +70,7 @@ let expForm = `Experience
     
 </ul>`
 
-let refForm = `Refrence
-<br>
+let refForm = `
 <label for="refName">Name</label>
 <input type="text" id="refName">
 <br>
@@ -92,20 +86,45 @@ let refForm = `Refrence
     
 </ul>`
 
-let imgForm = `Image
-<br>
+let imgForm = `
 <label for="image">Image</label>
 <input type="file" id="image">
 <br>
 <input type="button" value="Submit" id="img-btn">`
 
 //// Initialization from Local Storage
+let name = localStorage.getItem('name') || 'Name';
+let role = localStorage.getItem('role') || 'Role';
+let desc = localStorage.getItem('desc') || 'Desc';
 let eduList = JSON.parse(localStorage.getItem('edu')) || [];
 let skillArray = JSON.parse(localStorage.getItem('list')) || [];
 let awardList = JSON.parse(localStorage.getItem('award')) || [];
 let expList = JSON.parse(localStorage.getItem('exp')) || [];
 let refList = JSON.parse(localStorage.getItem('ref')) || [];
 let imgUrl = localStorage.getItem('img') || 'images/Naruto.jpeg';
+
+// Inializing DOM elements
+let Img = document.querySelector("img");
+Img.setAttribute('src',imgUrl);
+let IntroResume = {
+    name : document.querySelector(".name h1"),
+    role : document.querySelector(".name p"),
+}
+let SkillResume = {
+    list : document.querySelector(".experties ul"),
+}
+let EducationResume = {
+    list : document.querySelector(".education .content"),
+}
+let AwardResume = {
+    list : document.querySelector(".award .content"),
+}
+let ExpResume = {
+    list : document.querySelector(".experience .content"),
+}
+let RefResume = {
+    list : document.querySelector(".reference .content"),
+}
 
 //// Create Elements Function ////
 function createElementE (type,text,props){
@@ -179,6 +198,80 @@ topic.addEventListener("change",()=>{
     }
 })
 
+//// OnLoad /////////
+IntroResume.name.innerHTML = name;
+IntroResume.role.innerHTML = role;
+document.querySelector(".visible.overview p").innerHTML = desc;
+
+skillArray.forEach(skill => {
+    let li = createElementE('li',skill.name,{'id':skill.id+'R'});
+    SkillResume.list.appendChild(li);
+})
+
+eduList.forEach(edu => {
+    let yearElement = createElementE('strong',edu.year,{});
+    let instituteElement = createElementE('h3',edu.institute,{});
+    let descElement = createElementE('p',edu.desc,{});
+    let SubElement = createElementE('div','',{
+        'class':'Sub',
+        'id':edu.id+'R'
+    });
+
+    SubElement.appendChild(yearElement);
+    SubElement.appendChild(instituteElement);
+    SubElement.appendChild(descElement);
+    
+    EducationResume.list.appendChild(SubElement);
+})
+
+awardList.forEach(award => {
+    let titleElement = createElementE('h3',award.title,{});
+    let descElement = createElementE('p',award.desc,{});
+    let SubElement = createElementE('div','',{
+        'class':'Sub',
+        'id':award.id+'R'
+    });
+
+    SubElement.appendChild(titleElement);
+    SubElement.appendChild(descElement);
+
+    AwardResume.list.appendChild(SubElement);
+})
+
+expList.forEach(exp => {
+    let yearElement = createElementE('p',exp.year,{});
+    let companyElement = createElementE('h3',exp.company,{});
+    let descElement = createElementE('p',exp.desc,{});
+    let SubElement = createElementE('div','',{
+        'class':'Sub',
+        'id':exp.id+'R'
+    });
+    
+    SubElement.appendChild(yearElement);
+    SubElement.appendChild(companyElement);
+    SubElement.appendChild(descElement);
+
+    ExpResume.list.appendChild(SubElement);
+})
+
+refList.forEach(ref => {
+    let nameElement = createElementE('h3',ref.name,{});
+    let postElement = createElementE('p',ref.post,{});
+    let companyElement = createElementE('p',ref.company,{});
+
+    let SubElement = createElementE('div','',{
+        'class':'Sub',
+        'id':ref.id+'R'
+    });
+
+    SubElement.appendChild(nameElement);
+    SubElement.appendChild(postElement);
+    SubElement.appendChild(companyElement);
+
+    RefResume.list.appendChild(SubElement);
+})
+
+
 // Intro /////////////////////////////////
 function INTRO (){
     let name = document.getElementById("name")
@@ -187,9 +280,14 @@ function INTRO (){
     let overviewDesc = document.getElementById("overview-desc");
 
     btn.addEventListener("click",()=> {
-        document.querySelector(".name h1").innerHTML = name.value;
-        document.querySelector(".name p").innerHTML = role.value;
+        IntroResume.name.innerHTML = name.value;
+        IntroResume.role.innerHTML = role.value;
         document.querySelector(".visible.overview p").innerHTML = overviewDesc.value;
+
+        localStorage.setItem('name',name.value);
+        localStorage.setItem('role',role.value);
+        localStorage.setItem('desc',overviewDesc.value);
+
         name.value="";
         role.value="";
         overviewDesc.value="";
@@ -224,7 +322,21 @@ function SKILL () {
     }
 
     skillArray.forEach(skill => {
-        addSkill(skill.id, skill.name);
+        let formSkillList = document.querySelector(".skill-form ul");
+        let li_Form = createElementE('li',skill.name,{'id':skill.id+'L'});
+
+        let delBtn = createElementE('input','',{
+            'id':skill.id,
+            'value':'X',
+            'type':'button'
+        });
+        
+        delBtn.addEventListener("click",(e)=>{
+            del(e.target.id,'skill');
+        });
+
+        li_Form.appendChild(delBtn);
+        formSkillList.appendChild(li_Form);
     })
 
 
@@ -296,8 +408,6 @@ function EDU () {
     })
 
     const addEdu = (id,institute, year, desc) => {
-
-    
         let yearElement = createElementE('strong',year,{});
         let yearElementF = createElementE('strong',year,{});
 
@@ -366,8 +476,60 @@ function EDU () {
     }
 
     eduList.forEach(edu => {
-        addEdu(edu.id, edu.institute, edu.year, edu.desc);
+        let yearElementF = createElementE('strong',edu.year,{});
+        let instituteElementF = createElementE('h3',edu.institute,{});
+        let descElementF = createElementE('p',edu.desc,{});
+
+        let SubElementF = createElementE('div','',{
+            'id':edu.id+'L'
+        });
+
+        let delBtn = createElementE('input','',{
+            'type':'button',
+            'value':'X',
+            'id':edu.id
+        });
+
+        delBtn.addEventListener("click",e => {
+            del(e.target.id,'edu');
+        })
+
+        let editBtn = createElementE('input','',{
+            'type':'button',
+            'id':edu.id+'-E',
+            'value':'Edit'
+        });
+
+        editBtn.addEventListener("click",e => {
+            let ID = e.target.id.split('-')[0];
+            document.querySelector(".edu-form .edit").classList.remove("invisible");
+            eduContainerF.classList.add("invisible");
+            document.getElementById("edu-btn").classList.add("invisible");
+
+            eduCancel.setAttribute('id',ID+'-Cancel');
+            eduSave.setAttribute('id',ID+'-Save');
+
+            let [data] = eduList.filter(edu => edu.id == ID);
+
+            console.log(data);
+            yearElementF.value = data.year;
+
+            document.getElementById("institute").value = data.institute;
+            document.getElementById("year").value = data.year;
+            document.getElementById("desc").value = data.desc;
+
+        })
+
+        SubElementF.appendChild(yearElementF);
+        SubElementF.appendChild(instituteElementF);
+        SubElementF.appendChild(descElementF);
+
+        SubElementF.appendChild(delBtn);
+        SubElementF.appendChild(editBtn);
+
+        eduContainerF.appendChild(SubElementF);
     })
+    
 
     document.getElementById("edu-btn").addEventListener("click",e => {
         unique_id = Date.now();
@@ -396,10 +558,7 @@ function AWARD (){
     let awardContainer = document.querySelector(".award .content");
     let awardContainerF = document.querySelector(".award-form ul");
 
-
-
     const addaward = (id,title, desc) => {
-
         let titleElement = createElementE('h3',title,{});
         let titleElementF = createElementE('h3',title,{});
 
@@ -436,7 +595,29 @@ function AWARD (){
     }
 
     awardList.forEach(award => {
-        addaward(award.id, award.title, award.desc);
+        let titleElementF = createElementE('h3',award.title,{});
+        let descElementF = createElementE('p',award.desc,{});
+
+        let SubElementF = createElementE('div','',{
+            'id':award.id+'L'
+        });
+
+        let delBtn = createElementE('input','',{
+            'id':award.id,
+            'type':'button',
+            'value':'X'
+        });
+
+        delBtn.addEventListener("click",e => {
+            del(e.target.id,'award');
+        })
+
+        SubElementF.appendChild(titleElementF);
+        SubElementF.appendChild(descElementF);
+
+        SubElementF.appendChild(delBtn);
+
+        awardContainerF.appendChild(SubElementF);
     })
 
     document.getElementById("award-btn").addEventListener("click",e => {
@@ -465,7 +646,6 @@ function EXP () {
     let expContainerF = document.querySelector(".exp-form ul");
 
     const addExp = (id,company, year, desc) => {
-
         let yearElement = createElementE('p',year,{});
         let yearElementF = createElementE('p',year,{});
 
@@ -507,7 +687,31 @@ function EXP () {
     }
 
     expList.forEach(exp => {
-        addExp(exp.id, exp.company, exp.year, exp.desc);
+        let yearElementF = createElementE('p',exp.year,{});
+        let companyElementF = createElementE('h3',exp.company,{});
+        let descElementF = createElementE('p',exp.desc,{});
+
+        let SubElementF = createElementE('div','',{
+            'id':exp.id+'L'
+        });
+
+        let delBtn = createElementE('input','',{
+            'type':'button',
+            'id':exp.id,
+            'value':'X'
+        });
+
+        delBtn.addEventListener("click",e => {
+            del(e.target.id,'exp');
+        })
+
+        SubElementF.appendChild(yearElementF);
+        SubElementF.appendChild(companyElementF);
+        SubElementF.appendChild(descElementF);
+
+        SubElementF.appendChild(delBtn);
+
+        expContainerF.appendChild(SubElementF);
     })
 
     document.getElementById("exp-btn").addEventListener("click",e => {
@@ -538,10 +742,7 @@ function REF () {
     let refContainer = document.querySelector(".reference .content");
     let refContainerF = document.querySelector(".ref-form ul");
 
-
-
     const addRef = (id,name, post, company) => {
-
         let nameElement = createElementE('h3',name,{});
         let nameElementF = createElementE('h3',name,{});
 
@@ -583,7 +784,30 @@ function REF () {
     }
 
     refList.forEach(ref => {
-        addRef(ref.id, ref.name, ref.post, ref.company);
+        let nameElementF = createElementE('h3',ref.name,{});
+        let postElementF = createElementE('p',ref.post,{});
+        let companyElementF = createElementE('p',ref.company,{});
+        let SubElementF = createElementE('div','',{
+            'id':ref.id+'L'
+        });
+
+        let delBtn = createElementE('input','',{
+            'type':'button',
+            'id':ref.id,
+            'value':'X'
+        });
+
+        delBtn.addEventListener("click",e => {
+            del(e.target.id,'ref');
+        })
+
+        SubElementF.appendChild(nameElementF);
+        SubElementF.appendChild(postElementF);
+        SubElementF.appendChild(companyElementF);
+
+        SubElementF.appendChild(delBtn);
+
+        refContainerF.appendChild(SubElementF);
     })
 
     document.getElementById("ref-btn").addEventListener("click",e => {
@@ -613,7 +837,6 @@ function REF () {
 function IMG () {
     let Img = document.querySelector("img");
     let imgInput = document.getElementById("image");
-    Img.setAttribute('src',imgUrl);
     document.getElementById("img-btn").addEventListener("click",e => {
         let reader = new FileReader();
         reader.onload = function(e) {

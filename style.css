@@ -6,7 +6,7 @@
 
 body {
     color: grey;
-    background-color: grey;
+    /* background-color: grey; */
 }
 
 /* .sub-form {
@@ -32,9 +32,8 @@ body {
 
 .page {
     display: flex;
-    margin-bottom: 10px;
+    margin: 5%;
     width: 60%;
-    margin: auto;
     border: 1px solid grey;
     background-color: white;
     padding-right: 1%;
@@ -109,8 +108,10 @@ tr:first-of-type {
     padding: 5% 0;
 }
 
-ul {
+.page ul{
     list-style-image: url('images/kunai-min-20.png');
+}
+ul{
     margin-left: 10%;
 }
 
