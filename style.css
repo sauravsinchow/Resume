@@ -84,7 +84,7 @@ img {
 
 table {
     margin-left: 10%;
-    border-collapse: collapse;
+    /* border-collapse: collapse; */
 }
 
 tr {
@@ -241,7 +241,9 @@ td {
   }
 
 input {
-    margin: 5px;
+    margin: 5px auto;
+    /* display: block; */
+    /* width: 30%; */
 }
 input[type="text"] {
     border: 0;
@@ -250,11 +252,28 @@ input[type="text"] {
 
 #preview {
     display: block;
-    margin: auto;
-    z-index: 6;
+    margin: 20px auto 0;
+}
+
+#closePreview {
+    margin: 20px auto;
+    display: block;
 }
 
 .modal .page {
     width: 100%;
     margin: 0;
+}
+
+legend {
+    margin: 10px;
+}
+
+.formContent {
+    margin: 10px 20px;
+    text-align: center;
+}
+
+.formContent ul {
+    text-align: left;
 }

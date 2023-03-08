@@ -11,24 +11,40 @@
     </head>
     <body>
         <section class="modal hidden">
-            <button id="closePreview">Close</button>
+            <button id="closePreview"><i class="fa-solid fa-eye-slash"></i></button>
         </section>
         <div class="overlay hidden"></div>
-        <button id="preview">Preview</button>
+        <button id="preview"><i class="fa-solid fa-eye"></i></button>
         <div class="layout">
             <div class="form">
-                <select name="topic" id="topic">
-                    <option value="none">Select</option>
+                <!-- <select name="topic" id="topic"> -->
+                    <!-- <option value="none">Select</option>
                     <option value="intro">Intro</option>
                     <option value="skill">Skills</option>
                     <option value="edu">Education</option>
                     <option value="award">Award</option>
                     <option value="exp">Experience</option>
                     <option value="ref">Reference</option>
-                    <option value="img">Image</option>
-                </select>
+                    <option value="img">Image</option> -->
+                <!-- </select> -->
                 <form class="Sub-Form">
+                    <fieldset>
+                        <legend>
+                            <select name="topic" id="topic">
+                                <option value="none">Select</option>
+                                <option value="intro">Intro</option>
+                                <option value="skill">Skills</option>
+                                <option value="edu">Education</option>
+                                <option value="award">Award</option>
+                                <option value="exp">Experience</option>
+                                <option value="ref">Reference</option>
+                                <option value="img">Image</option>
+                            </select>
+                        </legend>
+                        <div class="formContent">
 
+                        </div>
+                    </fieldset>
                 </form>                
             </div>
             <div class="page">
@@ -153,6 +169,6 @@
                 </div>
             </div>
         </div>
-        <script src="index.js"></script>
+        <script src="index.js" type="module"></script>
     </body>
 </html>
