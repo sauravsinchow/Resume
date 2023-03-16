@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Resume</title>
+</head>
+<body>
+    <section class="modal hidden">
+        <button id="closePreview"><i class="fa-solid fa-eye-slash"></i></button>
+    </section>
+    <div class="overlay hidden"></div>
+    <button id="preview"><i class="fa-solid fa-eye"></i></button>
+    <div class="layout">
+        <div class="form">
+            <form class="Sub-Form">
+                <fieldset>
+                    <legend>
+                        <select name="topic" id="topic">
+                            <option value="none">Select</option>
+                            <option value="intro">Intro</option>
+                            <option value="contact">Contact</option>
+                            <option value="skill">Skills</option>
+                            <option value="edu">Education</option>
+                            <option value="award">Award</option>
+                            <option value="exp">Experience</option>
+                            <option value="ref">Reference</option>
+                            <option value="img">Image</option>
+                        </select>
+                    </legend>
+                    <div class="formContent">
+
+                    </div>
+                </fieldset>
+            </form>                
+        </div>
+        <div class="page">
+            <div id="left">
+                <div class="image-container">
+                    <img src="images/profilePic.webp">
+                    <div class="name">
+                        <h1 id="name">Name</h1>
+                        <p id="role">Role</p>
+                    </div>
+                </div>
+
+                <div class="section hidden overview">
+                    <h1 class="title">Overview</h1>
+                    <hr>
+                    <div class="content">
+                        <p id="overviewDesc1">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </p>
+                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <i class="icon fa-brands fa-whatsapp"></i>
+                                <a  href="https://wa.me/918102070732?text=Hi%20Saurabh" target="_blank">+91 8102070732</a>
+                            </td>
+
+                            <td>
+                                <i class="icon fa-regular fa-envelope"></i>
+                                <a href="mailto:saurav123sau123@gmail.com" target="_blank">saurav@gmail.com</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon fa-brands fa-linkedin-in"></i>
+                                <a href="https://www.linkedin.com/in/saurabh-kumar-7b947a156/" target="_blank">saurabh-kumar</a></td>
+
+                            <td>
+                                <i class="icon fa-solid fa-phone"></i>
+                                <a href="tel: 918102070732" target="_blank">Call</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="section experties">
+                    <h1 class="title">Experties</h1>
+                    <hr>
+                    <div class="content">
+                        <ul>
+                            <!-- <li>Multi Shadow Clone Jutsu</li>
+                            <li>Rasengan</li>
+                            <li>Baryon Mode</li>
+                            <li>Sage Mode</li> -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section education">
+                    <h1 class="title">Education</h1>
+                    <hr>
+                    <div class="content">
+                        
+                    </div>
+                </div>
+
+                <div class="section award">
+                    <h1 class="title">Award</h1>
+                    <hr>
+                    <div class="content">
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="right">
+                <div class="section visible overview">
+                    <h1 class="title">Overview</h1>
+                    <hr>
+                    <div class="content">
+                        <p id="overviewDesc2">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </p>
+                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <i class="icon fa-brands fa-whatsapp"></i>
+                                <a id="whatsApp" href="https://wa.me/918102070732?text=Hi%20Saurabh" target="_blank">+91 8102070732</a>
+                            </td>
+
+                            <td>
+                                <i class="icon fa-regular fa-envelope"></i>
+                                <a id="mail" href="mailto:saurav123sau123@gmail.com" target="_blank">saurav@gmail.com</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="icon fa-brands fa-linkedin-in"></i>
+                                <a id="linkedIn" href="https://www.linkedin.com/in/saurabh-kumar-7b947a156/" target="_blank">saurabh-kumar</a>
+                            </td>
+
+                            <td>
+                                <i class="icon fa-solid fa-phone"></i>
+                                <a id="phone" href="tel: 918102070732" target="_blank">Call</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="section experience">
+                    <h1 class="title">Work Experience</h1>
+                    <hr>
+                    <div class="content">
+                        
+                    </div>
+                </div>
+                <div class="section reference">
+                    <h1 class="title">Reference</h1>
+                    <hr>
+                    <div class="content"> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./index.js" type="module" ></script>
+</body>
+</html>
