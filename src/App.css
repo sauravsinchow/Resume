@@ -1,0 +1,279 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: grey;
+  /* background-color: grey; */
+}
+
+/* .sub-form {
+  display: none;
+} */
+
+.invisible {
+  display: none;
+}
+
+.layout {
+  display: flex;
+}
+
+.form {
+  width: 40%;
+  margin: 5%;
+}
+
+.form {
+  background-color: white;
+}
+
+.page {
+  display: flex;
+  margin: 5%;
+  width: 60%;
+  border: 1px solid grey;
+  background-color: white;
+  padding-right: 1%;
+}
+
+.hidden {
+  display: none;
+}
+
+#left {
+  width: 40%;
+}
+
+#right {
+  margin-left: 5%;
+  width: 60%;
+}
+
+#left .section {
+  margin-left: 15%;
+}
+
+img {
+  width: 100%;
+}
+
+.image-container {
+  position: relative;
+}
+
+.name {
+  position: absolute;
+  bottom: 0;
+  width: 110%;
+  color: white;
+  font-size: .9em;
+  background-color: rgba(132, 197, 203, 0.5);
+  transition: transform .2s;
+}
+
+/* .name:hover{
+  transform: scale(1.1);
+} */
+
+.name h1, .name p{
+  margin-left: 30px;
+}
+
+table {
+  margin-left: 10%;
+  /* border-collapse: collapse; */
+}
+
+tr {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+tr:first-of-type {
+  border-top: 1px solid #e2e2e2;
+}
+
+.section {
+  padding-bottom: 10%;
+  /* transition: transform .2s; */
+}
+
+/* .section:hover {
+  transform: scale(1.1);
+} */
+
+.content {
+  padding: 5% 0;
+}
+
+.page ul{
+  /* list-style-image: url('images/kunai-min-20.png'); */
+}
+ul{
+  margin-left: 10%;
+}
+
+.title {
+  color: #1C1D1F;
+  border-bottom: 2px solid #84C5CB;
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+td {
+  padding: 10px;
+  padding-right: 0;
+}
+
+.icon {
+  color: 84C5CB;
+}
+
+.Sub {
+  margin: 5% 0 0 0;
+}
+
+.reference .content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.reference .Sub{
+  width: 50%;
+}
+
+.experties, .overview {
+  padding-top: 10%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .page{
+      width: 100%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .page{
+      display: block;
+      width: 100%;
+      /* padding: 2%; */
+  }
+
+  .hidden {
+      display: block;
+  }
+
+  .visible {
+      display: none;
+  }
+
+  table {
+      margin: auto;
+  }
+
+  .section, #left .section {
+      margin: 5% 5%;
+      padding: 0;
+  }
+  /* .section:hover {
+      transform: scale(1);
+  } */
+  #left {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+  }
+  
+  #right {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+  }
+
+  img {
+      width: 50%;
+  }
+
+  .name {
+      width: 60%;
+  }
+  .overview{
+      padding-top: 0;
+  }
+
+}
+
+@media only screen and (min-width: 1800px) {
+  .page {
+      width: 30%;
+  }
+}
+
+.overlay {
+  position: fixed;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+backdrop-filter: blur(3px);
+z-index: 1;
+}
+
+.modal {
+  gap: 0.4rem;
+  width: 50%;
+  padding: 1.3rem;
+  min-height: 250px;
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  z-index: 2;
+}
+
+input {
+  margin: 5px auto;
+  /* display: block; */
+  /* width: 30%; */
+}
+input[type="text"] {
+  border: 0;
+  border-bottom: 1px solid black;
+}
+
+#preview {
+  display: block;
+  margin: 20px auto 0;
+}
+
+#closePreview {
+  margin: 20px auto;
+  display: block;
+}
+
+.modal .page {
+  width: 100%;
+  margin: 0;
+}
+
+legend {
+  margin: 10px;
+}
+
+.formContent {
+  margin: 10px 20px;
+  text-align: center;
+}
+
+.formContent ul {
+  text-align: left;
+}
