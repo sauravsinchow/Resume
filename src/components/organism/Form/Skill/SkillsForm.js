@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react";
-import SkillFormListItem from "./SkillFormListItem";
+import { useCallback, useEffect, useState } from "react";
+import SkillFormListItem from "./components/SkillFormListItem";
 
-import { generateUID } from "../utils/utils";
+import { generateUID } from "../../../../utils/utils";
 
 function SkillsForm(props){
+
+    const {
+        submitHandler,
+        skill: skillProps,
+        ...restProps
+    } = props;
 
     const [list,setList] = useState([]);
     const [skill,setSkill] = useState('');
@@ -12,22 +18,22 @@ function SkillsForm(props){
         setSkill(e.target.value);
     }
 
-    const addSkillHandler = () => {
+    const addSkillHandler = useCallback( () => {
         const updatedList = [...list, {name:skill, id:generateUID()}];
         setList(updatedList);
         setSkill('');
-        props.submitHandler(updatedList);
-    }
+        submitHandler(updatedList);
+    } , [submitHandler, skill, list] );
 
-    const deleteSkill = (id) => {
-        const updatedList = list.filter(skill => skill.id != id);
+    const deleteSkill = useCallback( (id) => {
+        const updatedList = list.filter(skill => skill.id !== id);
         setList(updatedList);
-        props.submitHandler(updatedList);
-    }
+        submitHandler(updatedList);
+    } , [submitHandler, list] )
 
     useEffect(()=>{
-        setList(props.dataModel.skill)
-    },[]);
+        setList(skillProps)
+    },[skillProps]);
 
     return (
         <>

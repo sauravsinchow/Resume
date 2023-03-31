@@ -2,6 +2,11 @@ import { useRef, useState } from "react";
 
 function ImageForm(props){
 
+    const {
+        submitHandler,
+        ...restProps
+    } = props;
+
     const [url, setURL] = useState('');
 
     const imgInput = useRef();
@@ -10,7 +15,7 @@ function ImageForm(props){
         let reader = new FileReader();
         reader.onload = function(e) {
             setURL(e.target.result);
-            props.submitHandler({url: e.target.result});
+            submitHandler({url: e.target.result});
         }
         reader.readAsDataURL(imgInput.current.files[0]);
         

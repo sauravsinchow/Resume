@@ -1,11 +1,11 @@
 import { useState } from "react";
-import AwardResume from "./AwardResume";
-import EducationResume from "./EducationResume";
-import ExperienceResume from "./ExperienceResume";
-import ImageContainer from "./ImageContainer";
-import OverviewResume from "./OverviewResume";
-import ReferenceResume from "./ReferenceResume";
-import SkillResume from "./SkillResume";
+import AwardResume from "./Awards/AwardResume";
+import EducationResume from "./Education/EducationResume";
+import ExperienceResume from "./Experience/ExperienceResume";
+import ImageContainer from "./Intro/ImageContainer";
+import OverviewResume from "./Intro/OverviewResume";
+import ReferenceResume from "./Reference/ReferenceResume";
+import SkillResume from "./Skills/SkillResume";
 
 function Page(props){
 

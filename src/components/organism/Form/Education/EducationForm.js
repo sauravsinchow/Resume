@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
-import { generateUID } from "../utils/utils";
-import EducationFormListItem from "./EducationFormListItem";
+import { generateUID } from "../../../../utils/utils";
+import EducationFormListItem from "./components/EducationFormListItem";
+import EditButton from '../../../molecules/EditButton';
 
 function EducationForm(props){
+
+    const {
+        edu,
+        submitHandler,
+        ...restProps
+    } = props;
 
     const [institute,setInstitute] = useState('');
     const [year,setYear] = useState('');
@@ -14,7 +21,7 @@ function EducationForm(props){
     const [list,setList] = useState([]);
 
     useEffect(()=>{
-        setList(props.dataModel.edu);
+        setList(edu);
     },[]);
 
     const onInstituteChange = (e) => {
@@ -30,16 +37,16 @@ function EducationForm(props){
     const addEdu = () => {
         const updatedList = [...list, {id: generateUID(), institute, year, desc}];
         setList(updatedList);
-        props.submitHandler(updatedList);
+        submitHandler(updatedList);
         setInstitute('');
         setDesc('');
         setYear('');
     }
 
     const deleteEdu = (id) => {
-        const updatedList = list.filter(edu => edu.id != id);
+        const updatedList = list.filter(edu => edu.id !== id);
         setList(updatedList);
-        props.submitHandler(updatedList);
+        submitHandler(updatedList);
     }
 
     const editEdu = (edu) => {
@@ -68,7 +75,7 @@ function EducationForm(props){
             return edu;
         })
         setList(updatedList);
-        props.submitHandler(updatedList);
+        submitHandler(updatedList);
 
         setInstitute('');
         setDesc('');
@@ -99,10 +106,7 @@ function EducationForm(props){
 
             {
                 editing && 
-                <div className="edit">
-                    <input type="button" value="Cancel" className="cancelBtn" onClick={cancelEdit} />
-                    <input type="button" value="Save Changes" className="SaveBtn" onClick={saveChange} />
-                </div>
+                <EditButton cancelEdit={cancelEdit} saveChange={saveChange} />
             }
             
         </>

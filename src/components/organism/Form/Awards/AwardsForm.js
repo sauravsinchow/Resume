@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
-import { generateUID } from "../utils/utils";
-import AwardFormListItem from "./AwardFormListItem";
+import { generateUID } from "../../../../utils/utils";
+import AwardFormListItem from "./components/AwardFormListItem";
+import InputTextField from '../../../atoms/InputTextField';
+import Button from '../../../atoms/Button';
 
 function AwardsForm(props){
+
+    const {
+        awards,
+        submitHandler,
+        ...restProps
+    } = props;
 
     const [title,setTitle] = useState('');
     const [desc,setDesc] = useState('');
@@ -10,7 +18,7 @@ function AwardsForm(props){
     const [list,setList] = useState([]);
 
     useEffect(()=>{
-        setList(props.dataModel.awards);
+        setList(awards);
     },[]);
 
     const onTitleChange = (e) =>{
@@ -23,25 +31,25 @@ function AwardsForm(props){
     const addAwards = () => {
         const updatedList = [...list, {id: generateUID(), title, desc}];
         setList(updatedList);
-        props.submitHandler(updatedList);
+        submitHandler(updatedList);
 
         setTitle('');
         setDesc('');
     }
 
     const deleteAward = (id) => {
-        const updatedList = list.filter(award => award.id != id);
+        const updatedList = list.filter(award => award.id !== id);
         setList(updatedList);
-        props.submitHandler(updatedList);
+        submitHandler(updatedList);
     }
 
     return (
         <>
-            <input type="text" id="title" placeholder="Title" value={title} onInput={onTitleChange} />
+            <InputTextField id="title" placeholder="Title" value={title} onInput={onTitleChange} />
             <br />
-            <input type="text" id="Awarddesc" placeholder="Description" value={desc} onInput={onDescChange} />
+            <InputTextField id="Awarddesc" placeholder="Description" value={desc} onInput={onDescChange} />
             <br />
-            <input type="button" value="Add" id="award-btn" onClick={addAwards} />
+            <Button value="Add" id="award-btn" onClick={addAwards} />
 
             <ul>
                 {

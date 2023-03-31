@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import './App.css';
-import Form from './components/Form';
-import Page from './components/Page';
+import Form from './components/organism/Form/index';
+import Page from './components/organism/Resume/Page';
 
 const initialState = {
   intro: {
@@ -24,7 +24,7 @@ function App() {
 
   const onFormSubmit = (section,data) => {
     const updatedState = {...dataModel, [section]:data};
-    console.log(data);
+    console.log(section,data);
     setDataModel(updatedState);
     localStorage.setItem('data',JSON.stringify(updatedState));
   }

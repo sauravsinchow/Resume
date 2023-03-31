@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
-import { generateUID } from "../utils/utils";
-import ReferenceFormListItem from "./ReferenceFormListItem";
+import { generateUID } from "../../../../utils/utils";
+import ReferenceFormListItem from "./components/ReferenceFormListItem";
 
 function ReferenceForm(props){
+
+    const {
+        Ref,
+        submitHandler,
+        ...restProps
+    } = props;
 
     const [name,setName] = useState('');
     const [post,setPost] = useState('');
@@ -11,7 +17,7 @@ function ReferenceForm(props){
     const [list,setList] = useState([]);
 
     useEffect(()=>{
-        setList(props.dataModel.ref);
+        setList(Ref);
     },[]);
 
     const onNameChange = e => {
@@ -27,7 +33,7 @@ function ReferenceForm(props){
     const addRef = () => {
         const updatedList = [...list, {id: generateUID(), name, post, company}];
         setList(updatedList);
-        props.submitHandler(updatedList);
+        submitHandler(updatedList);
 
         setName('');
         setPost('');
@@ -37,7 +43,7 @@ function ReferenceForm(props){
     const deleteRef = id => {
         const updatedList = list.filter(ref => ref.id !== id);
         setList(updatedList);
-        props.submitHandler(updatedList);
+        submitHandler(updatedList);
     }
 
     return (

@@ -2,6 +2,11 @@ import { useState } from "react";
 
 function IntroForm(props){
 
+    const {
+        submitHandler : submitHandlerProps,
+        ...restProps
+    } = props;
+
     const [name,setName] = useState('');
     const [role,setRole] = useState('');
     const [desc,setDesc] = useState('');
@@ -20,7 +25,7 @@ function IntroForm(props){
     }
 
     const submitHandler = () => {
-        props.submitHandler({name,role,desc});
+        submitHandlerProps({name,role,desc});
 
         setName('');
         setRole('');
