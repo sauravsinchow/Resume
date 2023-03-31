@@ -3,6 +3,15 @@ import { generateUID } from "../../../../utils/utils";
 import EducationFormListItem from "./components/EducationFormListItem";
 import EditButton from '../../../molecules/EditButton';
 
+const createNewEdu = (institute, year, desc) => {
+    return {
+        id: generateUID(),
+        institute,
+        year,
+        desc
+    }
+}
+
 function EducationForm(props){
 
     const {
@@ -35,7 +44,8 @@ function EducationForm(props){
     }
 
     const addEdu = () => {
-        const updatedList = [...list, {id: generateUID(), institute, year, desc}];
+        const newEdu = createNewEdu(institute,year,desc);
+        const updatedList = [...list, newEdu];
         setList(updatedList);
         submitHandler(updatedList);
         setInstitute('');

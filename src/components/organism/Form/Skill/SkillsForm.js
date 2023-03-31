@@ -3,6 +3,13 @@ import SkillFormListItem from "./components/SkillFormListItem";
 
 import { generateUID } from "../../../../utils/utils";
 
+const createNewSkill = (skill) => {
+    return {
+        id: generateUID(),
+        name:skill
+    }
+}
+
 function SkillsForm(props){
 
     const {
@@ -19,7 +26,8 @@ function SkillsForm(props){
     }
 
     const addSkillHandler = useCallback( () => {
-        const updatedList = [...list, {name:skill, id:generateUID()}];
+        const newSkill = createNewSkill(skill);
+        const updatedList = [...list, newSkill];
         setList(updatedList);
         setSkill('');
         submitHandler(updatedList);

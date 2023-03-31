@@ -4,6 +4,14 @@ import AwardFormListItem from "./components/AwardFormListItem";
 import InputTextField from '../../../atoms/InputTextField';
 import Button from '../../../atoms/Button';
 
+const createNewAward = (title,desc) => {
+    return {
+        id: generateUID(),
+        title,
+        desc
+    };
+}
+
 function AwardsForm(props){
 
     const {
@@ -29,7 +37,8 @@ function AwardsForm(props){
     }
 
     const addAwards = () => {
-        const updatedList = [...list, {id: generateUID(), title, desc}];
+        const newAward = createNewAward(title,desc);
+        const updatedList = [...list, newAward];
         setList(updatedList);
         submitHandler(updatedList);
 

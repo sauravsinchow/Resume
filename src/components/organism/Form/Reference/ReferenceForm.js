@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import { generateUID } from "../../../../utils/utils";
 import ReferenceFormListItem from "./components/ReferenceFormListItem";
 
+const createNewRef = (name, post, company) => {
+    return {
+        id: generateUID(),
+        name, 
+        post, 
+        company
+    }
+}
+
 function ReferenceForm(props){
 
     const {
@@ -31,7 +40,8 @@ function ReferenceForm(props){
     }
 
     const addRef = () => {
-        const updatedList = [...list, {id: generateUID(), name, post, company}];
+        const newRef = createNewRef(name,post,company);
+        const updatedList = [...list, newRef];
         setList(updatedList);
         submitHandler(updatedList);
 

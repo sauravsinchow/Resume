@@ -3,6 +3,15 @@ import { generateUID } from "../../../../utils/utils";
 import EditButton from "../../../molecules/EditButton";
 import ExperienceFormListItem from './components/ExperienceFormListItem'
 
+const createNewExp = ( company, year, desc) => {
+    return {
+        id: generateUID(),
+        company, 
+        year, 
+        desc
+    }
+}
+
 function ExperienceForm(props){
 
     const {
@@ -35,7 +44,8 @@ function ExperienceForm(props){
     }
 
     const addExp = () => {
-        const updatedList = [...list, {id: generateUID(), company, year, desc}];
+        const newExp = createNewExp(company,year,desc)
+        const updatedList = [...list, newExp];
         setList(updatedList);
         submitHandler(updatedList);
 
