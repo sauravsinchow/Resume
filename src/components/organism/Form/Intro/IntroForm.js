@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { submitIntro } from "../../../../redux/intro/introActions";
 
-function IntroForm(props){
-
-    const {
-        submitHandler : submitHandlerProps,
-        ...restProps
-    } = props;
+function IntroForm(){
+    const dispatch = useDispatch();
+    const introData = useSelector(state => state.intro)
 
     const [name,setName] = useState('');
     const [role,setRole] = useState('');
@@ -25,12 +24,17 @@ function IntroForm(props){
     }
 
     const submitHandler = () => {
-        submitHandlerProps({name,role,desc});
-
-        setName('');
-        setRole('');
-        setDesc('');
+        // setName('');
+        // setRole('');
+        // setDesc('');
+        dispatch(submitIntro({name, role, desc}));
     }
+
+    useEffect(()=>{
+        setName(introData.name);
+        setRole(introData.role);
+        setDesc(introData.desc);
+    },[])
 
     return (
         <>

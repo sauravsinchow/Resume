@@ -3,6 +3,8 @@ import { generateUID } from "../../../../utils/utils";
 import AwardFormListItem from "./components/AwardFormListItem";
 import InputTextField from '../../../atoms/InputTextField';
 import Button from '../../../atoms/Button';
+import { useDispatch, useSelector } from "react-redux";
+import { addAwardAction, deleteAwardAction } from "../../../../redux/awards/awardsActions";
 
 const createNewAward = (title,desc) => {
     return {
@@ -12,22 +14,14 @@ const createNewAward = (title,desc) => {
     };
 }
 
-function AwardsForm(props){
+function AwardsForm(){
 
-    const {
-        awards,
-        submitHandler,
-        ...restProps
-    } = props;
+    const dispatch = useDispatch();
+
+    const awardsData = useSelector(state => state.awards.list);
 
     const [title,setTitle] = useState('');
     const [desc,setDesc] = useState('');
-
-    const [list,setList] = useState([]);
-
-    useEffect(()=>{
-        setList(awards);
-    },[]);
 
     const onTitleChange = (e) =>{
         setTitle(e.target.value);
@@ -38,18 +32,14 @@ function AwardsForm(props){
 
     const addAwards = () => {
         const newAward = createNewAward(title,desc);
-        const updatedList = [...list, newAward];
-        setList(updatedList);
-        submitHandler(updatedList);
+        dispatch(addAwardAction(newAward));
 
         setTitle('');
         setDesc('');
     }
 
     const deleteAward = (id) => {
-        const updatedList = list.filter(award => award.id !== id);
-        setList(updatedList);
-        submitHandler(updatedList);
+        dispatch(deleteAwardAction(id));
     }
 
     return (
@@ -62,7 +52,7 @@ function AwardsForm(props){
 
             <ul>
                 {
-                    list.map(award => <AwardFormListItem award={award} deleteHandler={deleteAward} key={award.id} />)
+                    awardsData.map(award => <AwardFormListItem award={award} deleteHandler={deleteAward} key={award.id} />)
                 }
             </ul>
         </>

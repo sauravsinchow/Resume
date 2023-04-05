@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addRefAction, deleteRefAction } from "../../../../redux/referals/referalsActions";
 import { generateUID } from "../../../../utils/utils";
 import ReferenceFormListItem from "./components/ReferenceFormListItem";
 
@@ -11,23 +13,14 @@ const createNewRef = (name, post, company) => {
     }
 }
 
-function ReferenceForm(props){
+function ReferenceForm(){
 
-    const {
-        Ref,
-        submitHandler,
-        ...restProps
-    } = props;
+    const dispatch = useDispatch();
+    const referalData = useSelector(state => state.referals.list);
 
     const [name,setName] = useState('');
     const [post,setPost] = useState('');
     const [company,setCompany] = useState('');
-
-    const [list,setList] = useState([]);
-
-    useEffect(()=>{
-        setList(Ref);
-    },[]);
 
     const onNameChange = e => {
         setName(e.target.value);
@@ -41,9 +34,7 @@ function ReferenceForm(props){
 
     const addRef = () => {
         const newRef = createNewRef(name,post,company);
-        const updatedList = [...list, newRef];
-        setList(updatedList);
-        submitHandler(updatedList);
+        dispatch(addRefAction(newRef));
 
         setName('');
         setPost('');
@@ -51,9 +42,7 @@ function ReferenceForm(props){
     }
 
     const deleteRef = id => {
-        const updatedList = list.filter(ref => ref.id !== id);
-        setList(updatedList);
-        submitHandler(updatedList);
+        dispatch(deleteRefAction(id));
     }
 
     return (
@@ -68,7 +57,7 @@ function ReferenceForm(props){
 
             <ul>
                 {
-                    list.map(ref => <ReferenceFormListItem key={ref.id} Ref={ref} deleteHandler={deleteRef} />)
+                    referalData.map(ref => <ReferenceFormListItem key={ref.id} Ref={ref} deleteHandler={deleteRef} />)
                 }
             </ul>
         </>

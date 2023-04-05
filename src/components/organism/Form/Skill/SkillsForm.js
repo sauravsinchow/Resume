@@ -1,7 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import SkillFormListItem from "./components/SkillFormListItem";
 
 import { generateUID } from "../../../../utils/utils";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addSkill, deleteSkillAction } from '../../../../redux/skills/skillsActions'
 
 const createNewSkill = (skill) => {
     return {
@@ -10,15 +13,11 @@ const createNewSkill = (skill) => {
     }
 }
 
-function SkillsForm(props){
+function SkillsForm(){
 
-    const {
-        submitHandler,
-        skill: skillProps,
-        ...restProps
-    } = props;
+    const dispatch = useDispatch();
+    const skillsData = useSelector(state => state.skills.list);
 
-    const [list,setList] = useState([]);
     const [skill,setSkill] = useState('');
 
     const skillChangeHandler = (e) => {
@@ -27,21 +26,14 @@ function SkillsForm(props){
 
     const addSkillHandler = useCallback( () => {
         const newSkill = createNewSkill(skill);
-        const updatedList = [...list, newSkill];
-        setList(updatedList);
+        dispatch(addSkill(newSkill));
         setSkill('');
-        submitHandler(updatedList);
-    } , [submitHandler, skill, list] );
+    } , [dispatch, skill] );
 
     const deleteSkill = useCallback( (id) => {
-        const updatedList = list.filter(skill => skill.id !== id);
-        setList(updatedList);
-        submitHandler(updatedList);
-    } , [submitHandler, list] )
+        dispatch(deleteSkillAction(id));
+    } , [dispatch] )
 
-    useEffect(()=>{
-        setList(skillProps)
-    },[skillProps]);
 
     return (
         <>
@@ -50,7 +42,7 @@ function SkillsForm(props){
 
             <ul>
                 {
-                    list.map(skill => <SkillFormListItem key={skill.id} skill={skill} deleteHandler={deleteSkill} />)
+                    skillsData.map(skill => <SkillFormListItem key={skill.id} skill={skill} deleteHandler={deleteSkill} />)
                 }
             </ul>
         </>

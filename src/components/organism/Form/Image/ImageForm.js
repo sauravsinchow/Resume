@@ -1,21 +1,16 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { addImgAction } from "../../../../redux/image/imageActions";
 
-function ImageForm(props){
+function ImageForm(){
 
-    const {
-        submitHandler,
-        ...restProps
-    } = props;
-
-    const [url, setURL] = useState('');
-
+    const dispatch = useDispatch();
     const imgInput = useRef();
 
     const onSubmitHandler = () => {
         let reader = new FileReader();
         reader.onload = function(e) {
-            setURL(e.target.result);
-            submitHandler({url: e.target.result});
+            dispatch(addImgAction(e.target.result));
         }
         reader.readAsDataURL(imgInput.current.files[0]);
         

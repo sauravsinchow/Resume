@@ -1,13 +1,17 @@
 import ReferenceResumeListItem from "./ReferenceResumeListItem";
+import { useSelector } from "react-redux";
 
-function ReferenceResume(props){
+function ReferenceResume(){
+
+    const referalData = useSelector(state => state.referals.list);
+
     return (
         <div className="section reference">
             <h1 className="title">Reference</h1>
             <hr />
             <div className="content">
                 {
-                    props.Ref.map(ref => <ReferenceResumeListItem key={ref.id} Ref={ref} />)
+                    referalData.map(ref => <ReferenceResumeListItem key={ref.id} Ref={ref} />)
                 }    
             </div>
         </div>

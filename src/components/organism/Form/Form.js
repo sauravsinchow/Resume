@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import ImageForm from "./Image/ImageForm";
 import ExperienceForm from "./Experience/index";
 import AwardsForm from "./Awards/index";
@@ -7,32 +7,20 @@ import IntroForm from "./Intro/IntroForm";
 import SkillsForm from "./Skill/index";
 import ReferenceForm from "./Reference/index";
 
-function Form(props){
-
-    const {
-        dataModel,
-        onFormSubmit: onFormSubmitFromProps ,
-        ...restProps
-    } = props;
+function Form(){
 
     const [section,setSection] = useState('none');
-
-    const onFormSubmit = useCallback( (data) => {
-        onFormSubmitFromProps(section,data);
-        console.log(section,data);
-    } , [section, onFormSubmitFromProps] );
-
     
     const innerForms = useMemo( () => {
         return {
-        'intro' : <IntroForm submitHandler={onFormSubmit} />,
-        'skill' : <SkillsForm submitHandler={onFormSubmit} skill={dataModel.skill} />,
-        'edu' : <EducationForm submitHandler={onFormSubmit} edu={dataModel.edu} />,
-        'awards' : <AwardsForm submitHandler={onFormSubmit} awards={dataModel.awards} />,
-        'exp' : <ExperienceForm submitHandler={onFormSubmit} exp={dataModel.exp} />,
-        'ref' : <ReferenceForm submitHandler={onFormSubmit} Ref={dataModel.ref} />,
-        'img' : <ImageForm submitHandler={onFormSubmit} />
-    } }, [dataModel, onFormSubmit] )
+        'intro' : <IntroForm />,
+        'skill' : <SkillsForm />,
+        'edu' : <EducationForm />,
+        'awards' : <AwardsForm />,
+        'exp' : <ExperienceForm />,
+        'ref' : <ReferenceForm />,
+        'img' : <ImageForm />
+    } }, [] )
 
     const sectionChangeHandler = (e) => {
         console.log(e.target.value);

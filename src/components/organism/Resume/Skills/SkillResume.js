@@ -1,5 +1,9 @@
-function SkillResume(props){
+import { useSelector } from "react-redux";
+
+function SkillResume(){
     
+    const skillsData = useSelector(state => state.skills.list);
+
     return (
         <div className="section experties">
             <h1 className="title">Experties</h1>
@@ -7,7 +11,7 @@ function SkillResume(props){
             <div className="content">
                 <ul>
                     {
-                        props.skill.map(skill => <li key={skill.id}>{skill.name}</li>)
+                        skillsData.map(skill => <li key={skill.id}>{skill.name}</li>)
                     }
                 </ul>
             </div>

@@ -1,10 +1,15 @@
+import { useSelector } from "react-redux";
+
 function OverviewResume(props){
+
+    const introData = useSelector(state => state.intro);
+
     return (
         <div className="section visible overview">
                         <h1 className="title">Overview</h1>
                         <hr />
                         <div className="content">
-                            <p>{props.intro.desc}</p>
+                            <p>{introData.desc}</p>
                         </div>
                         <table>
                             <tbody>

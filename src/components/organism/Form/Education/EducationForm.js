@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { generateUID } from "../../../../utils/utils";
 import EducationFormListItem from "./components/EducationFormListItem";
 import EditButton from '../../../molecules/EditButton';
+import { useDispatch, useSelector } from "react-redux";
+import { addEduAction, deleteEduAction, editEduAction } from "../../../../redux/edu/eduActions";
 
 const createNewEdu = (institute, year, desc) => {
     return {
@@ -12,13 +14,10 @@ const createNewEdu = (institute, year, desc) => {
     }
 }
 
-function EducationForm(props){
+function EducationForm(){
 
-    const {
-        edu,
-        submitHandler,
-        ...restProps
-    } = props;
+    const dispatch = useDispatch();
+    const eduData = useSelector(state => state.edu.list);
 
     const [institute,setInstitute] = useState('');
     const [year,setYear] = useState('');
@@ -28,10 +27,6 @@ function EducationForm(props){
     const [editID, setEditID] = useState('');
 
     const [list,setList] = useState([]);
-
-    useEffect(()=>{
-        setList(edu);
-    },[]);
 
     const onInstituteChange = (e) => {
         setInstitute(e.target.value)
@@ -45,18 +40,14 @@ function EducationForm(props){
 
     const addEdu = () => {
         const newEdu = createNewEdu(institute,year,desc);
-        const updatedList = [...list, newEdu];
-        setList(updatedList);
-        submitHandler(updatedList);
+        dispatch(addEduAction(newEdu));
         setInstitute('');
         setDesc('');
         setYear('');
     }
 
     const deleteEdu = (id) => {
-        const updatedList = list.filter(edu => edu.id !== id);
-        setList(updatedList);
-        submitHandler(updatedList);
+        dispatch(deleteEduAction(id));
     }
 
     const editEdu = (edu) => {
@@ -77,16 +68,9 @@ function EducationForm(props){
     }
 
     const saveChange = () => {
-        setEditing(false);
-        const updatedList = list.map(edu => {
-            if(edu.id === editID){
-                return {editID, institute, year, desc};
-            }
-            return edu;
-        })
-        setList(updatedList);
-        submitHandler(updatedList);
+        dispatch(editEduAction({id: editID, institute, year, desc}));
 
+        setEditing(false);
         setInstitute('');
         setDesc('');
         setYear('');
@@ -108,7 +92,7 @@ function EducationForm(props){
                     <input type="button" value="Add" id="edu-btn" onClick={addEdu} />
                     <ul>
                         {
-                            list.map(edu => <EducationFormListItem edu={edu} key={edu.id} deleteHandler={deleteEdu} editHandler={editEdu} />)
+                            eduData.map(edu => <EducationFormListItem edu={edu} key={edu.id} deleteHandler={deleteEdu} editHandler={editEdu} />)
                         }
                     </ul>
                 </>

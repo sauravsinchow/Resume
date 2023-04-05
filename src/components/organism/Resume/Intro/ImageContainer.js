@@ -1,11 +1,16 @@
-function ImageContainer(props){
+import { useSelector } from "react-redux";
+
+function ImageContainer(){
+
+    const introData = useSelector(state => state.intro);
+    const imageData = useSelector(state => state.img);
 
     return (
         <div className="image-container">
-            <img src={props.img.url} alt='' />
+            <img src={imageData.url} alt='' />
             <div className="name">
-                <h1 id="name1">{props.intro.name}</h1>
-                <p>{props.intro.role}</p>
+                <h1 id="name1">{introData.name}</h1>
+                <p>{introData.role}</p>
             </div>
         </div>
     )

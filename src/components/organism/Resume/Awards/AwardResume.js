@@ -1,13 +1,17 @@
+import { useSelector } from "react-redux";
 import AwardResumeListItem from "./AwardResumeListItem";
 
-function AwardResume(props){
+function AwardResume(){
+
+    const awardsData = useSelector(state => state.awards.list)
+
     return (
         <div className="section award">
             <h1 className="title">Award</h1>
             <hr />
             <div className="content">
                 {
-                    props.awards.map(award => <AwardResumeListItem key={award.id} award={award} />)
+                    awardsData.map(award => <AwardResumeListItem key={award.id} award={award} />)
                 }  
             </div>
         </div>

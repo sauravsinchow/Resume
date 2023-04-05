@@ -1,13 +1,17 @@
+import { useSelector } from "react-redux";
 import EducationResumeListItem from "./EducationResumeListItem";
 
-function EducationResume(props){
+function EducationResume(){
+
+    const eduData = useSelector(state => state.edu.list);
+
     return (
         <div className="section education">
             <h1 className="title">Education</h1>
             <hr />
             <div className="content">
                 {
-                    props.edu.map(edu => <EducationResumeListItem edu={edu} key={edu.id} />)
+                    eduData.map(edu => <EducationResumeListItem edu={edu} key={edu.id} />)
                 }        
             </div>
         </div>

@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addExpAction, deleteExpAction, editExpAction } from "../../../../redux/exp/expActions";
 import { generateUID } from "../../../../utils/utils";
 import EditButton from "../../../molecules/EditButton";
 import ExperienceFormListItem from './components/ExperienceFormListItem'
@@ -12,13 +14,10 @@ const createNewExp = ( company, year, desc) => {
     }
 }
 
-function ExperienceForm(props){
+function ExperienceForm(){
 
-    const {
-        submitHandler,
-        exp,
-        ...restProps
-    } = props;
+    const dispatch = useDispatch();
+    const expData = useSelector(state => state.exp.list);
 
     const [company,setCompany] = useState('');
     const [year,setYear] = useState('');
@@ -26,12 +25,6 @@ function ExperienceForm(props){
 
     const [editing, setEditing] = useState(false);
     const [editId, setEditId] = useState('');
-
-    const [list,setList] = useState([]);
-
-    useEffect(()=>{
-        setList(exp);
-    },[]);
 
     const onCompanyChange = (e) => {
         setCompany(e.target.value);
@@ -45,9 +38,7 @@ function ExperienceForm(props){
 
     const addExp = () => {
         const newExp = createNewExp(company,year,desc)
-        const updatedList = [...list, newExp];
-        setList(updatedList);
-        submitHandler(updatedList);
+        dispatch(addExpAction(newExp));
 
         setCompany('');
         setDesc('');
@@ -55,9 +46,7 @@ function ExperienceForm(props){
     }
 
     const deleteExp = (id) => {
-        const updatedList = list.filter(exp => exp.id !== id)
-        setList(updatedList);
-        submitHandler(updatedList);
+        dispatch(deleteExpAction(id));
     }
 
     const editExp = (exp) => {
@@ -79,15 +68,7 @@ function ExperienceForm(props){
     }
 
     const saveChange = () => {
-        
-        const updatedList = list.map(exp => {
-            if(exp.id === editId){
-                return {editId, company, year, desc};
-            }
-            return exp;
-        })
-        setList(updatedList);
-        submitHandler(updatedList);
+        dispatch(editExpAction({id: editId, company, year, desc}));
 
         setEditing(false);
         setCompany('');
@@ -110,7 +91,7 @@ function ExperienceForm(props){
                     <input type="button" value="Add" id="exp-btn" onClick={addExp} />
                     <ul>
                         {
-                            list.map(exp => <ExperienceFormListItem exp={exp} key={exp.id} deleteHandler={deleteExp} editHandler={editExp} />)
+                            expData.map(exp => <ExperienceFormListItem exp={exp} key={exp.id} deleteHandler={deleteExp} editHandler={editExp} />)
                         }
                     </ul>
                 </>
